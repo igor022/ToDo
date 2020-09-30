@@ -1,29 +1,32 @@
 const todos = document.querySelector('#todos');
 const checkAllButton = document.querySelector('.check-all');
-const input = document.querySelector('#inputAdd');
+const formAdd = document.querySelector('.form-add');
 const itemsCount = document.querySelector('.items-count');
+
 const filterButtons = document.querySelectorAll('.additional-info .filter-buttons button');
 const clearButton = document.querySelector('.clear-tasks');
-let currentDeleteShow;
 
-const allTasks = [];
 
 checkAllButton.addEventListener('click', checkAll);
-input.addEventListener('keydown', addTodo);
+formAdd.addEventListener('submit', addTodo);
+
 for (let button of filterButtons) {
     console.log(button);
     button.addEventListener('click', filterEvent);
 }
+
 clearButton.addEventListener('click', clearAll);
 
 function addTodo(e) {
-    const text = e.target.value;
-    if (e.key === 'Enter' && text) {
-        createTask(e.target.value);
-        e.target.value = '';
+    e.preventDefault();
+
+    const input = document.querySelector('#inputAdd');
+    const text = input.value;
+
+    if (text) {
+        createTask(input.value);
+        input.value = '';
         updateCount();
-        allTasks.push({ text, isActive: false });
-        console.log(allTasks);
         filter();
     }
 }
@@ -34,16 +37,15 @@ function checkAll(e) {
     const completed = ([...todos.children].filter((i) => i.classList.contains('completed')));
     console.log(completed);
     if (completed.length !== todos.childElementCount) {
-        for (let i = 1; i < todos.childNodes.length; i++) {
-            checkTodo(todos.childNodes[i].querySelector('.check'));
+        for (let i = 0; i < todos.children.length; i++) {
+            checkTodo(todos.children[i].querySelector('.check'));
         }
     } else {
-        for (let i = 1; i < todos.childNodes.length; i++) {
-            toggleTodo({ target: todos.childNodes[i].querySelector('.check') });
+        for (let i = 0; i < todos.children.length; i++) {
+            toggleTodo({ target: todos.children[i].querySelector('.check') });
         }
     }
     updateCount();
-
 }
 
 function clearAll(e) {
@@ -73,24 +75,23 @@ function updateCount() {
 
 function createTask(text) {
     const block = document.createElement('div');
-    block.classList.add('task');
+    block.className = 'task';
+    block.innerHTML = `<button class="check"></button><p>${text}</p><button class="delete"></button>`;
+    block.addEventListener('click', taskEvents);
 
-    const checkButton = document.createElement('button');
-    checkButton.className = 'check';
-    checkButton.addEventListener('click', toggleTodo);
-
-    const todoText = createElement('p', text);
-    
-    const deleteButton = document.createElement('button');
-    deleteButton.className = 'delete';
-    deleteButton.addEventListener('click', deleteElement);
-    blockContent = { checkButton, todoText, deleteButton };
-    fillElement(block, blockContent);
-    
     todos.appendChild(block);    
-
 }
 
+function taskEvents(e) {
+    const classList = e.target.classList;
+    console.log('task event:', e.target);
+    if (classList.contains('check')) {
+        toggleTodo(e);
+    } 
+    if (classList.contains('delete')) {
+        deleteElement(e);
+    }
+}
 
 function checkTodo(item) {
     console.log(item);
@@ -109,22 +110,9 @@ function toggleTodo(e) {
     updateCount();
 }
 
-function showDeleteButton(e) {
-    //console.log('mouseover', e.target);
-    e.target.querySelector('.delete').style['visibility'] = 'visible';
-    currentDeleteShow = e.target;
-}
-
-function hideDeleteButton(e) {
-    //console.log(currentDeleteShow);
-    currentDeleteShow.querySelector('.delete').style['visibility'] = 'hidden';
-
-}
-
 function deleteElement(e) {
     console.log('delete')
     e.target.parentElement.remove();
-
     updateCount();
 }
 
@@ -180,7 +168,6 @@ function filterEvent(e) {
         filter();
     }
 }
-
 
 createTask('wap');
 createTask('todo');
