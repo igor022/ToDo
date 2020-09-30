@@ -1,0 +1,14 @@
+h1 {
+    text-align: center;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
