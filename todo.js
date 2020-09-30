@@ -49,7 +49,11 @@ function checkAll(e) {
 }
 
 function clearAll(e) {
-    todos.innerHTML = '';
+    [...todos.children].forEach((i) => {
+        if (i.classList.contains('completed')) {
+            i.remove();
+        }
+    })
     updateCount();
     checkForClear();
 }
@@ -74,12 +78,8 @@ function updateCount() {
 }
 
 function createTask(text) {
-    const block = document.createElement('div');
-    block.className = 'task';
-    block.innerHTML = `<button class="check"></button><p>${text}</p><button class="delete"></button>`;
-    block.addEventListener('click', taskEvents);
-
-    todos.appendChild(block);    
+    todos.innerHTML += `<div class="task"><button class="check"></button><p>${text}</p><button class="delete"></button></div>`;
+    todos.addEventListener('click', taskEvents); 
 }
 
 function taskEvents(e) {
