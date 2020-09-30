@@ -42,12 +42,14 @@ function checkAll(e) {
             toggleTodo({ target: todos.childNodes[i].querySelector('.check') });
         }
     }
+    updateCount();
 
 }
 
 function clearAll(e) {
     todos.innerHTML = '';
     updateCount();
+    checkForClear();
 }
 
 function checkForClear() {
@@ -64,7 +66,8 @@ function checkForClear() {
 }
 
 function updateCount() {
-    const childCount = todos.childElementCount;
+    console.log([...todos.children]);
+    const childCount = [...todos.children].filter((i) => !i.classList.contains('completed')).length;
     itemsCount.textContent = `${childCount} item${childCount === 1 ? '' : 's'}`; 
 }
 
@@ -95,6 +98,7 @@ function checkTodo(item) {
     item.nextSibling.classList.add('completed');
     item.parentElement.classList.add('completed');
     checkForClear();
+    updateCount();
 }
 
 function toggleTodo(e) {
@@ -102,6 +106,7 @@ function toggleTodo(e) {
     e.target.nextSibling.classList.toggle('completed');
     e.target.parentElement.classList.toggle('completed');
     checkForClear();
+    updateCount();
 }
 
 function showDeleteButton(e) {
@@ -178,5 +183,7 @@ function filterEvent(e) {
 
 
 createTask('wap');
+createTask('todo');
+createTask('what');
 updateCount();
 console.log('hello');
