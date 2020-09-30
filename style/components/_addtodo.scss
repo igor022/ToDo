@@ -1,0 +1,23 @@
+.add-todo {
+    display: flex;
+    align-items: center;
+    border-bottom: 3px solid rgb(237,237,237);
+
+    .check-all {
+        background: center / contain no-repeat url('../img/arrow.png');
+        padding: 12px;
+        border: 0;
+        margin-left: 11px;
+    }
+
+    .input-add {
+        font-size: 1rem;
+        margin-left: 16px;
+        width: 100%;
+        height: 50px;
+        padding: 5px;
+        outline: none;
+        border: 0;
+        box-sizing: border-box;
+    }
+}

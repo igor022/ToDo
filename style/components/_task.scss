@@ -1,0 +1,43 @@
+.task {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 10px;
+    align-items: center;
+    border-bottom: 1px solid rgb(237,237,237);
+    
+    p {
+        width: 100%;
+        margin: 0 0 0 20px;
+        
+        &.completed {
+            color: rgb(200,200,200);
+            text-decoration: line-through;
+        }
+    }
+    
+    .check {
+        padding: 12px;
+        border-radius: 100%;
+        border: 1px solid  rgb(200,200,200);
+        background-color: inherit;
+        outline: none;
+
+        &.completed {
+            background-color: rgb(122,205,189);
+            border: 1px solid  rgb(100,100,100);
+        }
+    }
+    
+    .delete {
+        background: center / contain no-repeat url('../img/cross.png');
+        border: 0px;
+        padding: 10px;
+        margin-right: 10px;
+        visibility: hidden;
+    }
+}
+
+.task:hover .delete {
+    visibility: visible;
+}
+

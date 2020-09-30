@@ -1,0 +1,23 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "todo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "node-sass --watch style -o css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igor022/ToDo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/igor022/ToDo/issues"
+  },
+  "homepage": "https://github.com/igor022/ToDo#readme",
+  "dependencies": {
+    "node-sass": "^4.14.1"
+  }
+}

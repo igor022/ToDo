@@ -1,0 +1,45 @@
+.additional-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: rgb(120, 120, 120);
+    padding: 0 10px;
+    
+    p {
+        width: 25%;
+    }
+    
+    button {
+        outline: none;
+        height: 20px;
+        color: rgb(120, 120, 120);
+        background-color: inherit;
+        border: 0;
+    }
+    
+    .filter-buttons button.selected {
+        color: rgb(120, 120, 120);
+        border: 1px solid rgb(239,213,213);
+        border-radius: 5px;
+    }
+    
+    .clear-tasks {
+        width: 25%;
+        visibility: hidden;
+        text-decoration: underline;
+    }
+}
+
+.promo {
+    position: absolute;
+    bottom: 5px;
+    font-size: 0.4rem;
+    color:  rgb(120, 120, 120);
+
+}
+
+.promo a {
+    text-decoration: none;
+    color:  rgb(120, 120, 120);
+}

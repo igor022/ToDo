@@ -1,0 +1,112 @@
+body {
+  background-color: whitesmoke;
+  color: #3c3c3c;
+  font-size: 1.5em; }
+
+body,
+input,
+button {
+  font-family: 'Helvetica'; }
+
+h1 {
+  color: #efd5d5;
+  text-align: center;
+  font-size: 5rem;
+  margin: 10px; }
+
+.container {
+  width: 500px;
+  margin: 0 auto;
+  background-color: white; }
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+*, *::after, *::before {
+  box-sizing: inherit; }
+
+.add-todo {
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid #ededed; }
+  .add-todo .check-all {
+    background: center/contain no-repeat url("../img/arrow.png");
+    padding: 12px;
+    border: 0;
+    margin-left: 11px; }
+  .add-todo .input-add {
+    font-size: 1rem;
+    margin-left: 16px;
+    width: 100%;
+    height: 50px;
+    padding: 5px;
+    outline: none;
+    border: 0;
+    box-sizing: border-box; }
+
+.additional-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #787878;
+  padding: 0 10px; }
+  .additional-info p {
+    width: 25%; }
+  .additional-info button {
+    outline: none;
+    height: 20px;
+    color: #787878;
+    background-color: inherit;
+    border: 0; }
+  .additional-info .filter-buttons button.selected {
+    color: #787878;
+    border: 1px solid #efd5d5;
+    border-radius: 5px; }
+  .additional-info .clear-tasks {
+    width: 25%;
+    visibility: hidden;
+    text-decoration: underline; }
+
+.promo {
+  position: absolute;
+  bottom: 5px;
+  font-size: 0.4rem;
+  color: #787878; }
+
+.promo a {
+  text-decoration: none;
+  color: #787878; }
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 10px;
+  align-items: center;
+  border-bottom: 1px solid #ededed; }
+  .task p {
+    width: 100%;
+    margin: 0 0 0 20px; }
+    .task p.completed {
+      color: #c8c8c8;
+      text-decoration: line-through; }
+  .task .check {
+    padding: 12px;
+    border-radius: 100%;
+    border: 1px solid #c8c8c8;
+    background-color: inherit;
+    outline: none; }
+    .task .check.completed {
+      background-color: #7acdbd;
+      border: 1px solid #646464; }
+  .task .delete {
+    background: center/contain no-repeat url("../img/cross.png");
+    border: 0px;
+    padding: 10px;
+    margin-right: 10px;
+    visibility: hidden; }
+
+.task:hover .delete {
+  visibility: visible; }
