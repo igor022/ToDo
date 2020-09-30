@@ -56,7 +56,7 @@ h1 {
     border-bottom: 1px solid rgb(237,237,237);
 }
 
-.task.active {
+.task.completed {
    
 }
 
@@ -65,7 +65,7 @@ h1 {
     margin: 0 0 0 20px;
 }
 
-.task p.active {
+.task p.completed {
     color: rgb(200,200,200);
     text-decoration: line-through;
 }
@@ -78,7 +78,7 @@ h1 {
     outline: none;
 }
 
-.check.active {
+.check.completed {
     background-color: rgb(122,205,189);
     border: 1px solid  rgb(100,100,100);
 }
@@ -104,13 +104,14 @@ h1 {
 }
 
 .additional-info button {
+    outline: none;
     height: 20px;
     color: rgba(120, 120, 120);
     background-color: inherit;
     border: 0;
 }
 
-.additional-info button.active {
+.additional-info button.selected {
     color: rgba(120, 120, 120);
     border: 1px solid rgb(239,213,213);
     border-radius: 5px;

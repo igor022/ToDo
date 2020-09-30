@@ -2,11 +2,17 @@ const todos = document.querySelector('#todos');
 const checkAllButton = document.querySelector('.check-all');
 const input = document.querySelector('#inputAdd');
 const itemsCount = document.querySelector('.items-count');
-let currentShow;
-let currentFilter;
+const filterButtons = document.querySelectorAll('.additional-info button');
+let currentDeleteShow;
+
+const allTasks = [];
 
 checkAllButton.addEventListener('click', checkAll);
 input.addEventListener('keydown', addTodo)
+for (let button of filterButtons) {
+    console.log(button);
+    button.addEventListener('click', filterEvent);
+}
 
 function addTodo(e) {
     const text = e.target.value;
@@ -14,13 +20,16 @@ function addTodo(e) {
         createTask(e.target.value);
         e.target.value = '';
         updateCount();
+        allTasks.push({ text, isActive: false });
+        console.log(allTasks);
+        filter();
     }
 }
 
 function checkAll(e) {
     console.log(todos.childNodes);
     for (let i = 1; i < todos.childNodes.length; i++) {
-        checkTodo({ target: todos.childNodes[i].querySelector('.check') });
+        checkTodo(todos.childNodes[i].querySelector('.check'));
     }
 }
 
@@ -37,7 +46,7 @@ function createTask(text) {
 
     const checkButton = document.createElement('button');
     checkButton.className = 'check';
-    checkButton.addEventListener('click', checkTodo);
+    checkButton.addEventListener('click', toggleTodo);
 
     const todoText = createElement('p', text);
     
@@ -48,23 +57,31 @@ function createTask(text) {
     fillElement(block, blockContent);
     
     todos.appendChild(block);    
+
 }
 
-function checkTodo(e) {
-    e.target.classList.toggle('active');
-    e.target.nextSibling.classList.toggle('active');
-    e.target.parentElement.classList.toggle('active');
+function checkTodo(item) {
+    console.log(item);
+    item.classList.add('completed');
+    item.nextSibling.classList.add('completed');
+    item.parentElement.classList.add('completed');
+}
+
+function toggleTodo(e) {
+    e.target.classList.toggle('completed');
+    e.target.nextSibling.classList.toggle('completed');
+    e.target.parentElement.classList.toggle('completed');
 }
 
 function showDeleteButton(e) {
     //console.log('mouseover', e.target);
     e.target.querySelector('.delete').style['visibility'] = 'visible';
-    currentShow = e.target;
+    currentDeleteShow = e.target;
 }
 
 function hideDeleteButton(e) {
-    //console.log(currentShow);
-    currentShow.querySelector('.delete').style['visibility'] = 'hidden';
+    //console.log(currentDeleteShow);
+    currentDeleteShow.querySelector('.delete').style['visibility'] = 'hidden';
 
 }
 
@@ -86,6 +103,48 @@ function fillElement(parent, children) {
         parent.appendChild(children[key]);
     }
 }
+
+function filter() {
+    const currentFilter = document.querySelector('.additional-info button.selected');
+    switch (currentFilter.classList[0]) {
+        case 'all':
+            for (let item of todos.children){
+                item.style['display'] = 'flex';
+            }
+            break;
+        case 'current':
+            for (let item of todos.children){
+                if (item.classList.contains('completed')) {
+                    item.style['display'] = 'none';
+                } else {
+                    item.style['display'] = 'flex';
+                }
+            }
+            break;
+        case 'completed':
+            for (let item of todos.children){
+                if (!item.classList.contains('completed')) {
+                    item.style['display'] = 'none';
+                } else {
+                    item.style['display'] = 'flex';
+                }
+            }
+            break;
+    }
+}
+
+function filterEvent(e) {
+    const currentFilter = document.querySelector('.additional-info button.selected');
+    if (e.target !== currentFilter)
+    {
+        console.log('filtering...');
+        console.log(todos.children);
+        currentFilter.classList.remove('selected');
+        e.target.classList.add('selected');
+        filter();
+    }
+}
+
 
 createTask('wap');
 updateCount();
