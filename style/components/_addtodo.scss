@@ -1,7 +1,7 @@
 .add-todo {
     display: flex;
     align-items: center;
-    border-bottom: 3px solid rgb(237,237,237);
+    border-bottom: 3px solid $color-border;
 
     .check-all {
         background: center / contain no-repeat url('../img/arrow.png');

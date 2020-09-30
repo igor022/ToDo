@@ -30,10 +30,19 @@ function addTodo(e) {
 
 function checkAll(e) {
     console.log(todos.childNodes);
-    for (let i = 1; i < todos.childNodes.length; i++) {
-        checkTodo(todos.childNodes[i].querySelector('.check'));
+
+    const completed = ([...todos.children].filter((i) => i.classList.contains('completed')));
+    console.log(completed);
+    if (completed.length !== todos.childElementCount) {
+        for (let i = 1; i < todos.childNodes.length; i++) {
+            checkTodo(todos.childNodes[i].querySelector('.check'));
+        }
+    } else {
+        for (let i = 1; i < todos.childNodes.length; i++) {
+            toggleTodo({ target: todos.childNodes[i].querySelector('.check') });
+        }
     }
-    checkForClear();
+
 }
 
 function clearAll(e) {
@@ -47,9 +56,11 @@ function checkForClear() {
     console.log(completed);
     if (completed.length > 0) {
         clearButton.style['visibility'] = 'visible';
-    } else {
-        clearButton.style['visibility'] = 'hidden';
-    }
+        return true;
+    } 
+        
+    clearButton.style['visibility'] = 'hidden';       
+    return false;
 }
 
 function updateCount() {
@@ -76,8 +87,6 @@ function createTask(text) {
     todos.appendChild(block);    
 
 }
-
-
 
 
 function checkTodo(item) {

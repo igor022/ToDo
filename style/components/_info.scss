@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: space-between;
     font-size: 0.8rem;
-    color: rgb(120, 120, 120);
+    color: $color-text-secondary;
     padding: 0 10px;
     
     p {
@@ -13,14 +13,14 @@
     button {
         outline: none;
         height: 20px;
-        color: rgb(120, 120, 120);
+        color: $color-text-secondary;
         background-color: inherit;
         border: 0;
     }
     
     .filter-buttons button.selected {
-        color: rgb(120, 120, 120);
-        border: 1px solid rgb(239,213,213);
+        color: $color-text-secondary;
+        border: 1px solid $color-secondary;
         border-radius: 5px;
     }
     
@@ -35,11 +35,11 @@
     position: absolute;
     bottom: 5px;
     font-size: 0.4rem;
-    color:  rgb(120, 120, 120);
+    color:  $color-text-secondary;
 
 }
 
 .promo a {
     text-decoration: none;
-    color:  rgb(120, 120, 120);
+    color: $color-text-secondary;
 }

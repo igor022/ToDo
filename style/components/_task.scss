@@ -3,14 +3,14 @@
     justify-content: space-between;
     padding: 15px 10px;
     align-items: center;
-    border-bottom: 1px solid rgb(237,237,237);
+    border-bottom: 1px solid $color-border;
     
     p {
         width: 100%;
         margin: 0 0 0 20px;
         
         &.completed {
-            color: rgb(200,200,200);
+            color: $color-text-completed;
             text-decoration: line-through;
         }
     }
@@ -18,13 +18,12 @@
     .check {
         padding: 12px;
         border-radius: 100%;
-        border: 1px solid  rgb(200,200,200);
+        border: 1px solid  $color-text-completed;
         background-color: inherit;
         outline: none;
 
         &.completed {
             background-color: rgb(122,205,189);
-            border: 1px solid  rgb(100,100,100);
         }
     }
     

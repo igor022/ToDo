@@ -99,8 +99,7 @@ body {
     background-color: inherit;
     outline: none; }
     .task .check.completed {
-      background-color: #7acdbd;
-      border: 1px solid #646464; }
+      background-color: #7acdbd; }
   .task .delete {
     background: center/contain no-repeat url("../img/cross.png");
     border: 0px;
