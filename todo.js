@@ -2,50 +2,42 @@ const todos = document.querySelector('#todos');
 const checkAllButton = document.querySelector('.check-all');
 const formAdd = document.querySelector('.form-add');
 const itemsCount = document.querySelector('.items-count');
-
-const filterButtons = document.querySelectorAll('.additional-info .filter-buttons button');
+const filterButtons = document.querySelector('.filter-buttons');
 const clearButton = document.querySelector('.clear-tasks');
-
 
 checkAllButton.addEventListener('click', checkAll);
 formAdd.addEventListener('submit', addTodo);
-
-for (let button of filterButtons) {
-    console.log(button);
-    button.addEventListener('click', filterEvent);
-}
-
+todos.addEventListener('click', editTaskStatus); 
+filterButtons.addEventListener('click', filterEvent);
 clearButton.addEventListener('click', clearAll);
 
 function addTodo(e) {
     e.preventDefault();
 
-    const input = document.querySelector('#inputAdd');
-    const text = input.value;
+    const text = formAdd.inputAdd.value;
 
     if (text) {
-        createTask(input.value);
-        input.value = '';
+        renderTask(taskTemplate(text));
+        formAdd.inputAdd.value = '';
         updateCount();
         filter();
     }
-}
+} 
 
 function checkAll(e) {
-    console.log(todos.childNodes);
+    const completed = getCompletedTasks();
 
-    const completed = ([...todos.children].filter((i) => i.classList.contains('completed')));
-    console.log(completed);
     if (completed.length !== todos.childElementCount) {
-        for (let i = 0; i < todos.children.length; i++) {
-            checkTodo(todos.children[i].querySelector('.check'));
-        }
+        [...todos.children].forEach(checkTodo);
     } else {
-        for (let i = 0; i < todos.children.length; i++) {
-            toggleTodo({ target: todos.children[i].querySelector('.check') });
-        }
+        [...todos.children].forEach(toggleTodo);
     }
+
     updateCount();
+}
+
+function getCompletedTasks() {
+    return ([...todos.children].filter((todo) => todo.classList.contains('completed')));
 }
 
 function clearAll(e) {
@@ -59,34 +51,38 @@ function clearAll(e) {
 }
 
 function checkForClear() {
-    console.log(todos);
-    const completed = ([...todos.children].filter((i) => i.classList.contains('completed')));
-    console.log(completed);
+    const completed = getCompletedTasks();
     if (completed.length > 0) {
-        clearButton.style['visibility'] = 'visible';
-        return true;
-    } 
-        
-    clearButton.style['visibility'] = 'hidden';       
-    return false;
+        clearButton.style.visibility = 'visible';
+    } else {
+        clearButton.style.visibility = 'hidden';       
+    }
 }
 
 function updateCount() {
-    console.log([...todos.children]);
-    const childCount = [...todos.children].filter((i) => !i.classList.contains('completed')).length;
+    const childCount = todos.childElementCount - getCompletedTasks().length;
     itemsCount.textContent = `${childCount} item${childCount === 1 ? '' : 's'}`; 
 }
 
-function createTask(text) {
-    todos.innerHTML += `<div class="task"><button class="check"></button><p>${text}</p><button class="delete"></button></div>`;
-    todos.addEventListener('click', taskEvents); 
+function taskTemplate(text) {
+    const template = 
+            `<div class="task">
+                <button class="check"></button>
+                <p>${text}</p>
+                <button class="delete"></button>
+            </div>`;
+
+    return template;
 }
 
-function taskEvents(e) {
+function renderTask(template) {
+    todos.innerHTML += template;
+}
+
+function editTaskStatus(e) {
     const classList = e.target.classList;
-    console.log('task event:', e.target);
     if (classList.contains('check')) {
-        toggleTodo(e);
+        toggleEvent(e);
     } 
     if (classList.contains('delete')) {
         deleteElement(e);
@@ -94,24 +90,30 @@ function taskEvents(e) {
 }
 
 function checkTodo(item) {
-    console.log(item);
     item.classList.add('completed');
-    item.nextSibling.classList.add('completed');
-    item.parentElement.classList.add('completed');
+    item.querySelector('.check').classList.add('completed');
+    item.querySelector('p').classList.add('completed');
+
+    filter();
+    checkForClear(); 
+    updateCount();
+}
+
+function toggleTodo(item) {
+    item.classList.toggle('completed');
+    item.querySelector('.check').classList.toggle('completed');
+    item.querySelector('p').classList.toggle('completed');
+
+    filter();
     checkForClear();
     updateCount();
 }
 
-function toggleTodo(e) {
-    e.target.classList.toggle('completed');
-    e.target.nextSibling.classList.toggle('completed');
-    e.target.parentElement.classList.toggle('completed');
-    checkForClear();
-    updateCount();
-}
+function toggleEvent(e) {
+    toggleTodo(e.target.parentElement);
+} 
 
 function deleteElement(e) {
-    console.log('delete')
     e.target.parentElement.remove();
     updateCount();
 }
@@ -132,12 +134,12 @@ function filter() {
     const currentFilter = document.querySelector('.additional-info button.selected');
     switch (currentFilter.classList[0]) {
         case 'all':
-            for (let item of todos.children){
+            for (const item of todos.children){
                 item.style['display'] = 'flex';
             }
             break;
         case 'current':
-            for (let item of todos.children){
+            for (const item of todos.children){
                 if (item.classList.contains('completed')) {
                     item.style['display'] = 'none';
                 } else {
@@ -146,7 +148,7 @@ function filter() {
             }
             break;
         case 'completed':
-            for (let item of todos.children){
+            for (const item of todos.children){
                 if (!item.classList.contains('completed')) {
                     item.style['display'] = 'none';
                 } else {
@@ -159,18 +161,14 @@ function filter() {
 
 function filterEvent(e) {
     const currentFilter = document.querySelector('.additional-info button.selected');
-    if (e.target !== currentFilter)
+    if (e.target.nodeName === 'BUTTON' && e.target !== currentFilter)
     {
-        console.log('filtering...');
-        console.log(todos.children);
         currentFilter.classList.remove('selected');
         e.target.classList.add('selected');
         filter();
     }
 }
 
-createTask('wap');
-createTask('todo');
-createTask('what');
+renderTask(taskTemplate('TODO'));
+
 updateCount();
-console.log('hello');

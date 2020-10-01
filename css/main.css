@@ -30,15 +30,18 @@ body {
 .add-todo {
   display: flex;
   align-items: center;
-  border-bottom: 3px solid #ededed; }
+  border-bottom: 3px solid #ededed;
+  box-sizing: border-box; }
   .add-todo .check-all {
     background: center/contain no-repeat url("../img/arrow.png");
     padding: 12px;
     border: 0;
     margin-left: 11px; }
+  .add-todo form {
+    margin-left: 16px;
+    flex-grow: 1; }
   .add-todo .input-add {
     font-size: 1rem;
-    margin-left: 16px;
     width: 100%;
     height: 50px;
     padding: 5px;
