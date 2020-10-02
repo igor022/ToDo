@@ -89,20 +89,20 @@ body {
   padding: 15px 10px;
   align-items: center;
   border-bottom: 1px solid #ededed; }
+  .task.completed p {
+    color: #c8c8c8;
+    text-decoration: line-through; }
+  .task.completed .check {
+    background-color: #7acdbd; }
   .task p {
     width: 100%;
     margin: 0 0 0 20px; }
-    .task p.completed {
-      color: #c8c8c8;
-      text-decoration: line-through; }
   .task .check {
     padding: 12px;
     border-radius: 100%;
     border: 1px solid #c8c8c8;
     background-color: inherit;
     outline: none; }
-    .task .check.completed {
-      background-color: #7acdbd; }
   .task .delete {
     background: center/contain no-repeat url("../img/cross.png");
     border: 0px;

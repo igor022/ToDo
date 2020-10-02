@@ -5,14 +5,21 @@
     align-items: center;
     border-bottom: 1px solid $color-border;
     
+    &.completed {   
+        p {
+            color: $color-text-completed;
+            text-decoration: line-through;
+        }
+
+        .check {
+            background-color: rgb(122,205,189);
+        }
+    }
+
     p {
         width: 100%;
         margin: 0 0 0 20px;
         
-        &.completed {
-            color: $color-text-completed;
-            text-decoration: line-through;
-        }
     }
     
     .check {
@@ -22,9 +29,6 @@
         background-color: inherit;
         outline: none;
 
-        &.completed {
-            background-color: rgb(122,205,189);
-        }
     }
     
     .delete {

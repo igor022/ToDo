@@ -91,8 +91,6 @@ function editTaskStatus(e) {
 
 function checkTodo(item) {
     item.classList.add('completed');
-    item.querySelector('.check').classList.add('completed');
-    item.querySelector('p').classList.add('completed');
 
     filter();
     checkForClear(); 
@@ -101,8 +99,6 @@ function checkTodo(item) {
 
 function toggleTodo(item) {
     item.classList.toggle('completed');
-    item.querySelector('.check').classList.toggle('completed');
-    item.querySelector('p').classList.toggle('completed');
 
     filter();
     checkForClear();
